@@ -1,0 +1,45 @@
+
+
+.princ {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topnav input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid gray;
+    float: left;
+    width: 80%;
+    background-image: url(../img/fondobuscador.jpg);
+    background-size: cover;
+    max-width: 100px;
+    border-radius: 8px;
+    color: white;
+}
+
+.logobuscar{
+    float: left;
+    float: 24%;
+    padding: 10px;
+    width: 17px;
+    background-image: url(https://img.freepik.com/foto-gratis/muro-hormigon-gris_53876-88973.jpg?w=996&t=st=1663974060~exp=1663974660~hmac=5e981b541e2842dc6525caea13c43aa4a43b9295bcbcedeb332fc2a8a30d8862);
+    background-size: cover;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logobuscar:hover {
+    background-image: url(https://img.freepik.com/foto-gratis/fondo-banner-trazo-pincel-rojo-negro-perfecto-canva_1361-3597.jpg?w=1060&t=st=1663970232~exp=1663970832~hmac=a8dec9c2a04b284ef2b56ed59f92fee35b804f6aeac8d59fdd3950f45c48956f);
+    background-size: cover;
+    border-color: white;
+}
+.buttonSearch{
+    background-image: url(../img/unnamed.jpg);
+    background-position:center ;
+    background-size:cover;
+    padding: 8%;
+    border-radius: 5px;
+}

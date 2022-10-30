@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Alkalami&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&family=Silkscreen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
+
+.card {
+    background-image: url(../img/FondoCard.png);
+    background-position: 100%;
+    background-attachment:local;
+    text-align: center;
+    padding: 25px;
+    padding-top: 1px;
+    margin: 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+   /* box-shadow: 0px 3px 10px black; */
+    transition: 0.3s;
+    transition: all 400ms ease;
+    height: 340px;
+    max-width: 400px;
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+    background-color:rgba(211, 107, 9, 0.596);
+     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+} 
+/* .imgbig {
+    border-radius: 8px;
+    border: white solid;
+} */
+
+.card:hover {
+     box-shadow: -12px 12px 2px -1px rgba(0, 0, 255, .2);
+    /* box-shadow: 5px 5px black; */
+    transform: translateY(-3%);
+    box-shadow: 0 0px 16px 0 rgba(0,0,0,0.2);
+}
+
+.contenido {
+    font-family: 'Roboto Concensed', sans-serif;
+    font-size: 17px;
+    color: white;
+    text-shadow: white;
+    padding: 20px 0px;
+}
+
+.contenidoh3 {
+    display: flex;
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    color:blue;
+    border-color: aqua;
+    position: relative;
+    top: 12px;
+    left: 75px;  
+    -webkit-text-stroke: 0.001px  orange;  
+}
+
+.contenido h4 {
+    display: flex;
+}
+
+.contenido img {
+    width: 3px;
+    height: 3px;
+}
+
+.ratinglog{
+    display: flex;
+    justify-content: end;
+}
+
+.ratinglog p {
+    margin-top: 7px;
+}
+
+.countainerCards{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tipo{
+    margin-top: 30px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 25px;
+    /* -webkit-text-stroke: 0.001px  orange; */
+}
+
+
+
+   

@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+.Landing {
+    background-image: url(../img/Landing2.jpg);
+    background-size: cover ;
+    /* background-repeat:no-repeat ; */
+    background-position: center;
+    min-height:100vh ;
+    display:table ;
+    margin: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.button{
+    background-color:rgb(243, 232, 232) ;
+    /* background: none; */
+    margin-left: 853px;
+    margin-top: 11px;
+    
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.button:hover{
+    border-color: goldenrod;
+    
+    width: 83px;
+    height: 83px;
+    border-radius: 50%;
+
+}
+ .fuente{
+     font-family: 'Lobster', cursive;
+     
+    }
+.nombre{
+    font-family: 'Righteous', cursive;
+    color: black;
+}
+
+/* .numeroPaginado {
+    font-family: 'Alkalami', serif;
+    
+    display: inline-block;
+    margin-right: 13px;
+    padding: 13px 23px;
+    color: black, orange; */
+    /* background-image: url(https://cdn-icons-png.flaticon.com/512/188/188918.png?w=740&t=st=1665692290~exp=1665692890~hmac=759730d6d1d4a322bc708937b31097c0b2f9bd806f57835d3ae65569d5d0fa1f); */
+    /* background-image: url(../img/188918.png);
+    background-size: cover;
+    border: goldenrod solid;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    transition: all 400ms ease; */
+    /* transform: translateY(-20%); */
+    
+/* } */

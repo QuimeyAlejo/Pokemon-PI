@@ -1,0 +1,175 @@
+.containerForm {
+    background-image: url(../img/defaultCreation.png);
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.formCreate {
+    width: 450px;
+    margin: 0px 60px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: #000000 solid;
+    margin-bottom: 25px;
+}
+
+textarea {
+    border: #000000 solid;
+}
+
+.tittle {
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px #000000;
+    padding-bottom: 40px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    font-family: 'Russo One', sans-serif;
+    letter-spacing: 8px;
+}
+
+.inputsss, textarea {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 7px;
+    margin: 17px 0px;
+    box-sizing: border-box;
+    font-size: 17px;
+    border-radius: 7px;
+    background-color: rgba(125, 120, 193, 0.57);
+}
+
+.inputsss::placeholder{
+    color: white;
+}
+
+textarea {
+    min-height: 100px;
+    max-height: 150px;
+    max-width: 100%;
+}
+
+.button {
+    background: #31384a;
+    color: white;
+    padding: 20px;
+    margin: 0px 0px;
+    cursor: pointer;
+    width: 20%;
+    margin-bottom: 17px;
+    margin-left: -220px;
+    transition: all 0.2s linear;
+}
+
+.button:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+   }
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.backBut {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    border: 2px solid gray;
+    padding: 5px;
+    border-radius: 6px;
+    background-image: url(http://project-nerd.com/wp-content/uploads/2013/11/Pokemon-Banner.jpeg);
+    background-size: cover;
+    transition: 0.3s;
+    transition: all 400ms ease;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Russo One', sans-serif;
+    width: 100px;
+}
+
+.backBut:hover {
+    color: white;
+    background-image: url(https://cdn.wallpapersafari.com/31/99/VWh3CL.png);
+    background-size: cover;
+    border-color: white;
+    transform: translateY(-20%);
+}
+
+
+.buttonCrear {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 6px;
+    border: 2px solid gray;
+    background-image: url(http://project-nerd.com/wp-content/uploads/2013/11/Pokemon-Banner.jpeg);
+    background-size: cover;
+    color: white;
+    transition: 0.3s;
+    transition: all 400ms ease;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: 'Russo One', sans-serif;
+}
+
+.buttonCrear:hover {
+    color: white;
+    background-image: url(https://cdn.wallpapersafari.com/31/99/VWh3CL.png);
+    background-size: cover;
+    border-color: white;
+    transform: translateY(-20%);
+}
+
+.genreX {
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.butonX {
+    background-color: red;
+    width: 30px;
+    max-height: 30px;
+    margin-left: 15px;
+    border-radius: 5px;
+}
+
+.genresSelec {
+    margin-top: 10px;
+}
+
+.generos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 250px;
+    margin: 0px 60px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: #000000 solid;
+    margin-bottom: 25px;
+    flex-direction: column;
+    font-family: 'Russo One', sans-serif;
+}
+
+.boxgrid {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selectGen{
+    /* background-image: url(https://img.freepik.com/vector-gratis/fondo-hexagonal-oscuro-color-degradado_79603-1410.jpg?w=996&t=st=1664304975~exp=1664305575~hmac=cf6692ce3cc625c032b939f2a22fbd45155e26b4ef260977e3f72266df6fbc55); */
+    background-size: cover;
+    background-attachment: fixed;
+    font-size: 20px;
+    color: white;
+    background-color: #75739E;
+    border: solid 2px black;
+}

@@ -1,0 +1,84 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&family=Silkscreen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
+
+.fondoDetail {
+    /* background-image: url(https://cdn.wallpapersafari.com/51/61/nU7Oow.jpg); */
+    background-image: url(../img/prueba1.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    min-height: 100vh; 
+}
+
+.cuerpo{
+    /* background-image: url(../img/FondoCard-cutout.png); */
+    background-repeat:no-repeat ;
+    background-position: center;
+    padding: 80px;
+    display: flex;
+    margin-left: 950px;
+    width: 140px;
+    flex-direction: column;
+    margin-top: auto;
+    
+    /* 
+    border-radius: 5px;
+    align-items: center;
+    text-align: center;
+    align-items: flex-end;
+    */
+    
+}
+.nombre{
+ color: rgb(0, 0, 0);
+ font-family: 'Anton', sans-serif;
+ font-size: 20px;
+ height: 115px;
+ margin-top: 75px;
+ margin-left: 100px;
+}
+/*
+.detalles{
+ color: orangered;
+ font-family: 'Alkalami', serif;
+ font-family: 'Silkscreen', cursive;
+}*/
+.buttonBack{
+    text-decoration: none;
+    color: black;
+    background: rgba(146, 100, 15, 0.877) ;
+    /* padding: 10px; */
+    border-radius: 5px;
+}
+    .buttonBack:hover{
+        background: rgba(180, 121, 12, 0.877) ;
+    }
+
+  /*  section{
+        display: flex;
+        justify-content: space-around;
+    } */
+
+.tipo{
+        
+        font-family: 'Chakra Petch', sans-serif;
+        font-size: 20px;
+        margin-top: auto;
+        margin-right: auto;
+        right: 1550px;
+    }   
+       
+
+ .imagen{
+    margin-top: 40px ;
+    width: 150px;
+    }
+
+
+ 

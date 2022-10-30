@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&display=swap');
+
+.paginado{
+    margin-top: 38px;
+}
+
+.ulPaginado {
+    list-style: none;
+    text-align: center;
+}
+
+.numeroPaginado {
+    font-family: 'Alkalami', serif, gold;
+    
+    display: inline-block;
+    margin-right: 13px;
+    padding: 13px 23px;
+    color: gold, orange;
+    /* background-image: url(https://cdn-icons-png.flaticon.com/512/188/188918.png?w=740&t=st=1665692290~exp=1665692890~hmac=759730d6d1d4a322bc708937b31097c0b2f9bd806f57835d3ae65569d5d0fa1f); */
+    background-image: url(../img/188918.png);
+    background-size: cover;
+    border: goldenrod solid;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    transition: all 400ms ease;
+    /* transform: translateY(-20%); */
+    
+}
+
+.numeroPaginado:hover {
+    color: white;
+    background: url(https://img.freepik.com/free-icon/open-pokeball_318-196467.jpg?size=338&ext=jpg&ga=GA1.2.522019281.1665692166);
+    background-size: cover;
+    border-color: white;
+    transform: translateY(-20%);
+}
+.numeroPaginado:focus{
+    box-shadow: 0 0 0 2px white, 0 0 0 4px goldenrod;
+    transform: translateY(-20%);
+    background: url(https://img.freepik.com/free-icon/open-pokeball_318-196467.jpg?size=338&ext=jpg&ga=GA1.2.522019281.1665692166);
+    background-size: cover;
+    
+}
