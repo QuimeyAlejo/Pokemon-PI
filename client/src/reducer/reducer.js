@@ -25,8 +25,7 @@ const initialState = {
  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------//             
             case 'FILTER_BY_TYPES':
             const allPokemons = state.allPokemons.map(e =>({
-            // const allPokemons = allPokemons.filter(e=>(
-            //  e.types.includes(action.payload)(e=> e[0].toUpperCase()+e.slice(1)))) 
+        
                 id: e.id,
                 name: e.name,
                 image: e.image,
