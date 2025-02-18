@@ -19,10 +19,15 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const { savePokemonsToDb } = require("./src/controllers/pokemonController.js");
 
-// Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
-});
+
+conn.sync({ force: false }) // No borra los datos existentes
+  .then(async () => {
+    console.log('📀 Base de datos sincronizada');
+    await savePokemonsToDb(); // 🔹 Llama a la función para guardar Pokémon
+    server.listen(3001, () => {
+      console.log('✅ Servidor corriendo en el puerto 3001');
+    });
+  })
+  .catch((err) => console.error('❌ Error sincronizando DB:', err));

@@ -1,53 +1,68 @@
-const axios = require('axios')
-const { Pokemon, Types } = require('../db.js')
+const { Pokemon, Types } = require("../db.js");
+const axios = require('axios');
 
-const getApiInfoPokemon = async ()=>{
-    const apiU = await axios.get('https://pokeapi.co/api/v2/pokemon')
-    const apiU2 = await axios.get(apiU.data.next)
-    const allPokes = apiU.data.results.concat(apiU2.data.results)
-    const finalInfo = await Promise.all(
-        allPokes.map(async e =>{
-            const poke = await axios.get(e.url) 
-            return{
-                id: poke.data.id,
-                image: poke.data.sprites.other.home.front_default,
-                name: poke.data.name,
-                hp: poke.data.stats[0].base_stat,
-                attack: poke.data.stats[1].base_stat,
-                defense: poke.data.stats[2].base_stat,
-                speed: poke.data.stats[5].base_stat,
-                height: poke.data.height,
-                weight: poke.data.weight,
-                // type: poke.data.types && poke.data.types.map(e =>{ return ' '+e.type.name[0].toUpperCase()+e.type.name.slice(1)+''})
-                type: poke.data.types && poke.data.types.map(e =>e.type.name)
-                // types: poke.data.types && poke.data.types.map(e =>{ return ' '+e.type.name[0].toUpperCase()+e.type.name.slice(1)+''})
+const getApiInfoPokemon = async () => {
+    try {
+        const apiU = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=50'); // 🔹 Trae más Pokémon
+        const allPokes = apiU.data.results;
+
+        const finalInfo = await Promise.all(
+            allPokes.map(async (e) => {
+                const poke = await axios.get(e.url);
+                return {
+                    id: poke.data.id,
+                    name: poke.data.name,
+                    image: poke.data.sprites.other.home.front_default,
+                    hp: poke.data.stats[0].base_stat,
+                    attack: poke.data.stats[1].base_stat,
+                    defense: poke.data.stats[2].base_stat,
+                    speed: poke.data.stats[5].base_stat,
+                    height: poke.data.height,
+                    weight: poke.data.weight,
+                    type: poke.data.types.map(t => t.type.name), 
+                };
+            })
+        );
+
+        return finalInfo;
+    } catch (error) {
+        console.error("❌ Error obteniendo datos de la API:", error);
+        return [];
+    }
+};
+
+// 🔹 Función para guardar los Pokemon en la base de datos
+const savePokemonsToDb = async () => {
+    try {
+        const pokemons = await getApiInfoPokemon(); 
+
+        for (const poke of pokemons) {
+            const [newPokemon, created] = await Pokemon.findOrCreate({
+                where: { name: poke.name }, 
+                defaults: {
+                    hp: poke.hp,
+                    attack: poke.attack,
+                    defense: poke.defense,
+                    speed: poke.speed,
+                    height: poke.height,
+                    weight: poke.weight,
+                    image: poke.image,
+                }
+            });
+
+            if (created) { 
+                const typeInstances = await Types.findAll({ where: { name: poke.type } });
+                await newPokemon.setTypes(typeInstances);
             }
-        })
-    )
-    return finalInfo;
-}
-
-
-const getDbInfo = async () =>{
-    return await Pokemon.findAll({
-        include:{
-            model: Types,
-            attributes: ['name'],
-            through:{
-                attributes: [],
-            },
         }
-    })
-}
 
+        console.log("✅ Pokemon de la API guardados en la BD");
+    } catch (error) {
+        console.error("❌ Error guardando Pokemon en la BD:", error);
+    }
+};
 
-const getAllPokemons = async () => {
-    const apiInfo = await getApiInfoPokemon();
-    const dbInfo = await getDbInfo();
-    const infoTotal = apiInfo.concat(dbInfo);
-    return infoTotal;
-}
-
+savePokemonsToDb();
 
 const getAllPokesOrByQuery = async (req, res)=>{
     const name = req.query.name;
@@ -116,10 +131,56 @@ const createPokemon = async (req, res) => {
     }
 }
 
+const pokeCreate = async (req, res) => {
+    let{
+    
+        name,
+      //  life, 
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        type,
+        img,
+        createInDb,
+    } = req.body
+
+    let pokeObj = {
+      
+        name,
+        hp,
+       // life,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        // image
+        img: img ? img : 'https://scarletviolet.pokemon.com/_images/pokemon/sprigatito/pokemon-sprigatito.webp'
+    }
+    try {
+        const pokeCreated = await Pokemon.create(pokeObj)
+        let typeDb = await Types.findAll({
+            where:{
+                name: type
+            }
+
+        })
+        pokeCreated.addType(typeDb)
+        res.status(200).send('Pokemon creado con éxito!')
+    } catch (error) {
+        res.status(404).send(error)
+    }
+    console.log(pokeCreate , 'pokemon ')
+}
+
 //---------------------------------------------------- delete ---------------------------------------------------------
 
 module.exports = {
     createPokemon,
     getAllPokesOrByQuery,
-    getPokeById
-    }
+    getPokeById,
+    savePokemonsToDb  
+};
