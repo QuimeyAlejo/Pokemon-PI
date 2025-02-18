@@ -114,50 +114,48 @@ const getPokeParam = async (req,res)=>{
 //             res.status(404).send(error)
 //         }
 //     }
-    const pokeCreate = async (req, res) => {
-        let{
+const pokeCreate = async (req, res) => {
+    let{
+        id,
+        name,
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        type,
+        image
+    } = req.body
+
+    let pokeObj = {
+        id,
+        name,
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        image: image ? image :  'https://scarletviolet.pokemon.com/_images/pokemon/sprigatito/pokemon-sprigatito.webp',
         
-            name,
-          //  life, 
-            hp,
-            attack,
-            defense,
-            speed,
-            height,
-            weight,
-            types,
-            image,
-            createInDb,
-        } = req.body
-    
-        let pokeObj = {
-          
-            name,
-            hp,
-           // life,
-            attack,
-            defense,
-            speed,
-            height,
-            weight,
-            // image
-            image: image ? image : 'https://scarletviolet.pokemon.com/_images/pokemon/sprigatito/pokemon-sprigatito.webp'
-        }
-        try {
-            const pokeCreated = await Pokemon.create(pokeObj)
-            let typeDb = await Types.findAll({
-                where:{
-                    name: types
-                }
-    
-            })
-            pokeCreated.addType(typeDb)
-            res.status(200).send('Pokemon creado con éxito!')
-        } catch (error) {
-            res.status(404).send(error)
-        }
-        console.log(pokeCreate , 'pokemon ')
+
+        
     }
+    try {
+        const pokeCreated = await Pokemon.create(pokeObj)
+        let typeDb = await Types.findAll({
+            where:{
+                name: type
+            }
+
+        })
+        pokeCreated.addTypes(typeDb)
+        res.status(200).send('Pokemon creado con éxito!')
+    } catch (error) {
+        res.status(404).send(error)
+    }
+}
 
 module.exports = {
     getPokeParam,

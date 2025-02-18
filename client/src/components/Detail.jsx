@@ -12,28 +12,9 @@ export default function Detail(id){
     const dispatch = useDispatch();
     const pokemons = useSelector(state => state.detail)
     var validateUrl = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(pokemons.image);
-    // const pokemons =useSelector(state => state.pokemons)
-    // const allPokemons = useSelector ((state)=> state.pokemons)
     console.log(pokemons ,'estado local ')
     
-//    const pokemons = useSelector ((state)=> state.allPokemons)
-    // console.log(pokemons.map(e=>e.types),'tipos de creados db')
-    // console.log(allPokes)
-//    const newasd = pokemons?.map(e=>e.types?.map(e=>e.name))
-//    const type1 = pokemons ? pokemons.map(e=> e.types) : pokemons.types?.findAll(e => e.name)
-    // console.log(type1 ,'aaa')
-   
-//    const newasd = pokemons?.map(e=>e.types?.map(e=>e.name.length[1]))
-        // console.log(newasd, 'types')
-    // useEffect(() =>{
-    //     dispatch(getPokeByParams(id))
-    // },[dispatch])
 
-    // useEffect(() => {
-    //     return function () {
-    //         dispatch(cleanDetail())
-    //     }
-    // },[dispatch])
     
     useEffect(() =>{
         dispatch(getPokeByParams(id))
@@ -47,7 +28,7 @@ export default function Detail(id){
 
 return(
     <div className="fondoDetail">
-        <div><button className="buttonBack"><Link className="linkBack" to='/home'>Volver</Link></button></div>
+        <div><button className="buttonBack"><Link className="linkBack" to='/home'>Back</Link></button></div>
         {
              pokemons.length > 0 ?
           
@@ -61,9 +42,9 @@ return(
                         <img className="imagen" src={pokemons? pokemons.map(e=>e.image) : img} alt="logoimg"  />
                        </div>  
                         <div  className="tipo">
-                         <h4>Tipo:{pokemons.types? pokemons.types.map(e=> e.name):pokemons.map(e=>' '+e.type)}</h4> 
-                         <h4>Ataque: {pokemons.map(e=>e.attack) }        Vida: {pokemons.map(e=>e.hp)}</h4>
-                         <h4>Defensa: {pokemons.map(e=>e.defense)}  Velocidad: {pokemons.map(e=>e.speed)}</h4>
+                         <h4>Type:{pokemons.type? pokemons.type.map(e=> e.name):pokemons.map(e=>' '+e.type)}</h4> 
+                         <h4>Attack: {pokemons.map(e=>e.attack) }        Life: {pokemons.map(e=>e.hp)}</h4>
+                         <h4>Defence: {pokemons.map(e=>e.defense)}  Speed: {pokemons.map(e=>e.speed)}</h4>
                         </div>  
                                  
              </div> : (

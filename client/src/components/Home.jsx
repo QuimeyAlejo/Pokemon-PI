@@ -51,11 +51,7 @@ export default function Home (){
             dispatch(filterPokemonsByTypes(e.target.value))
          setCurrentPage(1)
          }}
-   //    function handleFilterTypes(e){
-   //       e.preventDefault();
-   //       dispatch(filterPokemonsByTypes(e.target.value))
-   //       setCurrentPage(1)
-   //   }
+  
 //-------------------------------------------------------------------------//
        function handleFilterCreated(e){
          if(e.target.value === 'all'){
@@ -88,16 +84,7 @@ export default function Home (){
          setOrder(`Ordenado ${e.target.value}`)
        }}
 //-------------------------------------------------------------------------//     
-      // function handleOrderByHp(e){
-      //    e.prevent.default();
-      //    if(e.target.value === 'all'){
-      //       dispatch(getPokemons())
-
-      // }else{
-      //    dispatch(orderByHp(e.target.value));
-      //    setCurrentPage(1)
-      //    setOrder(`ordenado ${e.target.value}`)
-      // }
+      
 //--------------------------------------------------------------------------------------------------------//
      return(
         <div className="containerPri">
@@ -120,11 +107,7 @@ export default function Home (){
                 <option value='may'>Mayor</option>
                 <option value='men'>Menor</option>
                 </select>
-                {/* <select className="selects" onChange={e=> handleOrderByHp(e)}>
-                <option value='all'>Vida</option>
-                <option value='life+'>Mayor</option>
-                <option value='life-'>Menor</option>
-                </select> */}
+                
                 <select className="selects" onChange={e => handleFilterTypes(e)}>
                     <option  value='all'  >Tipos</option>
                     {allTypes.map((e,i)=>{
@@ -153,25 +136,18 @@ export default function Home (){
                  currentPoke.length > 0 ? currentPoke.map((e,i)=>{
                    return(
                      <div key={i}>
-                         <Link to={'/pokemons/' + e.id} className='cardlink'>
-                      
-                         <Card name={e.name.toUpperCase()} image={e.image} attack={e.attack} types={e.types? e.types.map(e=> e.name) : e.type}/>
-                                                                           
+                         <Link to={'/pokemons/' + e.id} className='cardlink'>                     
+                         <Card name={e.name.toUpperCase()} image={e.image} attack={e.attack} types={e.types? e.types.map(e=> e.name) : e.type}/>                                                                                                    
                    </Link>
                   </div>
-
-                   )
-
-                 
+                   )  
                 }): (
                   <div>
                      <img src={LogoGif} alt="AshGIF" />
-                   </div>
-                  
+                   </div>                 
                 )
                }  
-                 </div> 
-                 
+                 </div>                 
             </div>
         </div> )
         
