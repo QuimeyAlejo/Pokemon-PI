@@ -1,394 +1,134 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from 'react-router-dom';
-import { getTypes, postPokemons, getPokemons} from "../Redux/actions/actions";
-// import style from '../css/Form.module.css';
+import { useHistory, Link } from "react-router-dom";
+import { getTypes, postPokemons, getPokemons } from "../Redux/actions/actions";
+import "../css/PokemonCreate.css";
 
-// import validate from '../components/validate'
- import "../css/PokemonCreate.css";
+function validate(input) {
+  let errors = {};
+  const rules = [
+    { field: "name", message: "Ingrese un nombre" },
+    { field: "hp", min: 1, max: 999, message: "La vida debe ser entre 1 a 999" },
+    { field: "attack", min: 1, max: 999, message: "El ataque debe ser entre 1 a 999" },
+    { field: "defense", min: 1, max: 999, message: "La defensa debe ser entre 1 a 999" },
+    { field: "speed", min: 1, max: 999, message: "La velocidad debe ser entre 1 a 999" },
+    { field: "weight", min: 1, max: 999, message: "El peso debe ser entre 1 a 999" },
+    { field: "height", min: 1, max: 999, message: "La altura debe ser entre 1 a 999" },
+  ];
 
+  rules.forEach(({ field, min, max, message }) => {
+    if (!input[field] || (min && input[field] < min) || (max && input[field] > max)) {
+      errors[field] = message;
+    }
+  });
 
-
-//---------------------------------------------------- // VALIDACION DEL FORMULARIO // -------------------------------------------------------------------------------------------------//
-function validate(input){
-  let errors = {}
-  if(!input.name) errors.name = 'Ingrese un nombre'
-  if(!input.hp || input.hp < 1 || input.hp > 999) errors.hp = 'La vida debe ser entre 1 a 999'
-  if(!input.attack || input.attack < 1 || input.attack > 999) errors.attack = 'El ataque debe ser entre 1 a 999'
-  if(!input.defense || input.defense < 1 || input.defense > 999) errors.defense = 'La defensa debe ser entre 1 a 999'
-  if(!input.speed || input.speed < 1 || input.speed > 999) errors.speed = 'La velocidad debe ser entre 1 a 999'
-  if(!input.weight || input.weight < 1 || input.weight > 999) errors.weight = 'El peso debe ser entre 1 a 999'
-  if(!input.height || input.height < 1 || input.height > 999) errors.height = 'La altura debe ser entre 1 a 999'
-
-  return errors
+  return errors;
 }
 
-export default function CreatePokemon(){
-    const dispatch = useDispatch();
-    const history = useHistory()
-    const types = useSelector((state)=> state.types)
-    console.log(types , 'Estado types')
+export default function CreatePokemon() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const types = useSelector((state) => state.types);
 
-    const [input, setInput]=useState({
-        name: "",
-        hp:1  ,
-        attack:1,
-        defense:1,
-        speed:1,
-        height:1,
-        weight:1,
-        type:[],
-        image:""
-    })
-    const [errors, setErrors] = useState({})
+  const [input, setInput] = useState({
+    name: "",
+    hp: 1,
+    attack: 1,
+    defense: 1,
+    speed: 1,
+    height: 1,
+    weight: 1,
+    type: [],
+    image: "",
+  });
+  const [errors, setErrors] = useState({});
 
-    function handleInputChange(e){
-        setInput({
-          ...input,
-          [e.target.name] : e.target.value
-        })
-        console.log(input)
+  useEffect(() => {
+    dispatch(getPokemons());
+    dispatch(getTypes());
+  }, [dispatch]);
+
+  const handleInputChange = useCallback((e) => {
+    setInput((prevInput) => {
+      const newInput = { ...prevInput, [e.target.name]: e.target.value };
+      setErrors(validate(newInput));
+      return newInput;
+    });
+  }, []);
+
+  const handleSelect = useCallback((e) => {
+    const selectedType = e.target.value;
+    if (!input.type.includes(selectedType)) {
+      setInput((prevInput) => ({ ...prevInput, type: [...prevInput.type, selectedType] }));
     }
-    function handleSelect(e){
-      setInput({
-        ...input,
-        type:[...input.type , e.target.value]
-      })
-    }
-    function handleSubmit(e){
-      e.preventDefault()
-      setErrors(validate(input))
-      const errorSubmit = validate(input)
-      if(Object.values(errorSubmit).length !== 0 || !input.type.length){
-          alert('Datos erroneos o faltantes')
-      }else{
-      dispatch(postPokemons(input))
-      alert('¡Pokemon capturado con exito!')
-      setInput({
-          name: '',
-          hp:1,
-          attack:1,
-          defense:1,
-          speed:1,
-          height:1,
-          weight:1,
-          type:[],
-          image:""
-      })
-      history.push('/home')
-  }
-  }
-  function handleDelete(e){
-    e.preventDefault()
-    setInput({
-        ...input,
-        type: input.type.filter(g => g !== e.target.value)
-    })
-}
-    useEffect(()=>{
-      dispatch(getPokemons())
-      dispatch(getTypes())
+  }, [input.type]);
 
-    },[]);
+  const handleDelete = useCallback((typeToRemove) => {
+    setInput((prevInput) => ({ ...prevInput, type: prevInput.type.filter((t) => t !== typeToRemove) }));
+  }, []);
 
-  //   return(
-  //     <div  className={style.containerCreate}>
-  //       <Link to='/home'><button>Volver</button></Link>
-  //       <h1 className={style.separado}>Captura tu Pokemon!</h1>
-  //       <form >
-  //         <div className={style.separado}>
-          
-  //          {errors.name ? <p className="danger">{errors.username}</p> : null}
-  //         <p className={style.question}>
-  //         <label>Nombre</label>           
-  //         <input
-  //           type="text"
-  //            placeholder="Nombre"
-  //            name="name"
-  //            value={input.name}
-  //            onChange={handleInputChange}
-  //           //  //required
-  //            />
-  //            </p>
-  //         </div>
-  //         <div className={style.separado}>
-  //         {errors.name ? <p className="danger">{errors.username}</p> : null}
-  //          <p className={style.question}>
-  //         <label>Vida</label>           
-  //         <input
-  //           type="numero"
-  //            placeholder="Vida"
-  //            name="hp"
-  //            value={input.hp}
-  //            onChange={handleInputChange}
-  //            //required
-  //            />
-  //            </p>
-  //         </div > 
-  //         <div className={style.separado}>
-  //         <p className={style.question}>
-  //         <label>Velocidad</label>           
-  //         <input
-  //           type="numero"
-  //            placeholder="Velocidad"
-  //            name="speed"
-  //            value={input.speed}
-  //            onChange={handleInputChange}
-  //            //required
-  //            />
-  //           </p>
-  //         </div> 
-  //         <div  className={style.separado}>
-  //         <p className={style.question}>
-          // <label>Ataque</label>           
-          // <input
-          //   type="numero"
-          //    placeholder="Ataque"
-          //    name="attack"
-          //    value={input.attack}
-          //    onChange={handleInputChange}
-          //    //required
-          //    /></p>
-  //         </div> <div  className={style.separado}>
-  //         <p className={style.question}>
-          // <label>Defensa</label>           
-          // <input
-          //   type="numero"
-          //    placeholder="Defensa"
-          //    name="defense"
-          //    value={input.defense}
-          //    onChange={handleInputChange}
-          //    //required
-          //    /></p>
-  //         </div> <div  className={style.separado}>
-  //         <p className={style.question}>
-          // <label>Altura</label>           
-          // <input
-          //   type="numero"
-          //    placeholder="Altura"
-          //    name="height"
-          //    value={input.height}
-          //    onChange={handleInputChange}
-          //    //required
-          //    /></p>
-  //         </div>
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const validationErrors = validate(input);
+      setErrors(validationErrors);
 
-  //         <div  className={style.separado}>
-  //         <p className={style.question}>
-  //         <label>Peso</label>         
-  //         <input
-  //           type="numero"
-  //            placeholder="Peso"
-  //            name="weight"
-  //            value={input.weight}
-  //            onChange={handleInputChange}
-  //            //required
-  //            /></p>
-  //         </div>
+      if (Object.keys(validationErrors).length || !input.type.length) {
+        alert("Datos erróneos o faltantes");
+        return;
+      }
 
-  //         <div  className={style.separado}> 
-  //          <p className={style.question}>
-  //          <label>Imagen</label>          
-  //         <input
-  //           type="text"
-  //            placeholder="URL de la imagen..."
-  //            name="image"
-  //            value={input.image}
-  //            onChange={handleInputChange}
-  //            //required
-  //            /> 
-  //            </p>
-  //         </div>
+      dispatch(postPokemons(input));
+      alert("¡Pokemon capturado con éxito!");
+      history.push("/home");
+    },
+    [input, dispatch, history]
+  );
 
-  //         <select onChange={(e)=>handleSelect(e)}>
-  //           {types.map( (e)=>(
-  //             <option key={e} value={e}>{e} </option>
-  //             ))}
-  //         </select>
-              
-  //             </form>
-  //             <div >
-  //                       {
-  //                         input.type?.map((e, i) => (
-  //                               <div key={i} >
-  //                                   <p>{e}</p>
-  //                                   <br />
-  //                                   <button  value={e} onClick={(e) => handleDelete(e)}>X</button>
-  //                               </div>
-  //                           ))
-  //                       }
-  //                       {
-  //                           errors.type && (
-  //                               <p>{errors.type}</p>
-  //                               )
-  //                           }  
-  //                            </div>
-  //                            {/* <ul><li>{input.type.map(e=> e + ',')}</li></ul> */}
-  //                            {/* <select>{input.type.map(e=> e + ',')}</select> */}
-  //           <button onClick={(e) => handleSubmit(e)} type='submit' className={style.submit}>Capturar Pokemon</button>
-                    
-  //     </div>
-  //   )
-    
-  // }
-
-  return(
-    <div className='containerForm'>
-    <div className='tittle'>
-        <h1>Captura tu Pokemon!</h1>
-    </div>
-    <div className='boxgrid'>
-        <form className='formCreate'>
-        <input
-            type="text"
-             placeholder="Nombre"
-             name="name"
-             className='inputsss'
-             value={input.name}
-             onChange={handleInputChange}
-            //  //required
-             />
-            {
-                errors.name && (
-                    <p>{errors.name}</p>
-                )
-            }
-            <input 
-            type="text" 
-            placeholder='URL de la imagen...'
-            className='inputsss'
-            name='image'
-            value={input.image}
-            onChange={handleInputChange}
-            />
-           {/* <label>Vida</label>            */}
-           <input
-            type="numero"
-            placeholder="Vida"
-             name="hp"
-            value={input.hp}
-            onChange={handleInputChange}
-            className='inputsss'
-            //required
-             />
-          
-            {
-                errors.hp && (
-                    <p>{errors.hp}</p>
-                )
-            }
-              {/* <label>Peso</label>          */}
-          <input
-            type="numero"
-             placeholder="Peso"
-             name="weight"
-             className='inputsss'
-              value={input.weight}
-             onChange={handleInputChange}
-             //required
-            />
-            {
-                errors.weight && (
-                    <p>{errors.weight}</p>
-                )
-            }
-            {/* <label>Altura</label>            */}
-          <input
-                       className='inputsss'
-            type="numero"
-             placeholder="Altura"
-             name="height"
-             value={input.height}
-             onChange={handleInputChange}
-             //required
-             />
-            {
-                errors.height && (
-                    <p>{errors.height}</p>
-                )
-            }
-             {/* <label>Defensa</label>            */}
-          <input
-            type="numero"
-             placeholder="Defensa"
-             name="defense"
-             className='inputsss'
-             value={input.defense}
-             onChange={handleInputChange}
-             //required
-             />
-            {
-                errors.defense && (
-                    <p>{errors.defense}</p>
-                )
-            }
-            {/* <label>Ataque</label>            */}
-          <input
-            type="numero"
-             placeholder="Ataque"
-             name="attack"
-             className='inputsss'
-             value={input.attack}
-             onChange={handleInputChange}
-             //required
-             />
-              {
-                errors.attack && (
-                    <p>{errors.attack}</p>
-                )
-            }
-            {/* <label>Velocidad</label>            */}
-           <input
-             type="numero"
-             placeholder="Velocidad"
-             name="speed"
-             className='inputsss'
-              value={input.speed}
-              onChange={handleInputChange}
-              //required
+  return (
+    <div className="containerForm">
+      <h1 className="tittle">¡Captura tu Pokémon!</h1>
+      <form className="formCreate" onSubmit={handleSubmit}>
+        {Object.keys(input).map((field) => (
+          field !== "type" && (
+            <div key={field}>
+              <input
+                type={field === "name" || field === "image" ? "text" : "number"}
+                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                name={field}
+                value={input[field]}
+                onChange={handleInputChange}
+                className="inputsss"
               />
-               {
-                errors.speed && (
-                    <p>{errors.speed}</p>
-                )
-            }
-        </form>
-        <div className="generos">
-            <select className='selectGen' onChange={(e)=>handleSelect(e)}>
-                <option>Tipos</option>
-                {
-                    types?.map((types, i) => {
-                        return (
-                            <option key={i} value={types}>{types}</option>
-                        )
-                    })
-                }
-            </select>
-            <div className='genresSelec'>
-                {
-                    input.type?.map((t, i) => (
-                        <div key={i} className='genreX'>
-                            <p>{t}</p>
-                            <br />
-                            <button className='butonX' value={t} onClick={(e) => handleDelete(e)}>X</button>
-                        </div>
-                    ))
-                }
-                {
-                    errors.types && (
-                        <p>{errors.types}</p>
-                        )
-                    }   
+              {errors[field] && <p>{errors[field]}</p>}
             </div>
+          )
+        ))}
+        <select className="selectGen" onChange={handleSelect}>
+          <option value="">Tipos</option>
+          {types?.map((t, i) => (
+            <option key={i} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+        <div className="genresSelec">
+          {input.type.map((t, i) => (
+            <div key={i} className="genreX">
+              <p>{t}</p>
+              <button className="butonX" onClick={() => handleDelete(t)}>
+                X
+              </button>
+            </div>
+          ))}
         </div>
+        <button className="buttonCrear" type="submit">
+          Capturar
+        </button>
+        <Link className="backBut" to="/home">
+          Volver
+        </Link>
+      </form>
     </div>
-    <div className="buttons">
-        <button className='buttonCrear' type='submit' onClick={(e) => handleSubmit(e)}>Capturar</button>
-        <Link className='backBut' to='/home'>Volver</Link>
-    </div>
-</div>
-
-)
+  );
 }
- 
