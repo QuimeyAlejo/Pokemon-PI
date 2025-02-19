@@ -1,17 +1,17 @@
 import React from "react";
 import { useEffect,useState, } from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {getPokemons, filterPokemonsByTypes,getTypes,filterCreated,orderByName, orderByAttack, orderByHp} from '../actions/actions';
+import {getPokemons, filterPokemonsByTypes,getTypes,filterCreated,orderByName, orderByAttack, orderByHp} from '../Redux/actions/actions';
 import {Link} from 'react-router-dom';
 import Card from "./Card";
 import Paginado  from "./Paginado";
-import LogoGif from '../img/LogoGif.gif'
+import LogoGif from '../assets/img/LogoGif.gif'
 import SearchBar from '../components/SearchBar'
 import PokemonCreate from "./PokemonCreate";
 import '../css/Home.css'
 import '../css/Card.css'
 import '../css/ButtonsHome.css'
-import backgroundDefault from '../img/defaultCreation.png'
+import backgroundDefault from '../assets/img/defaultCreation.png'
 
 export default function Home (){
      const dispatch = useDispatch()

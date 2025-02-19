@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from 'react-router-dom';
-import { getTypes, postPokemons, getPokemons} from "../actions/actions";
+import { getTypes, postPokemons, getPokemons} from "../Redux/actions/actions";
 // import style from '../css/Form.module.css';
 
 // import validate from '../components/validate'

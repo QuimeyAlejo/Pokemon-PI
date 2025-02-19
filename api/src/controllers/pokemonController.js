@@ -66,7 +66,7 @@ savePokemonsToDb();
 
 const getAllPokesOrByQuery = async (req, res)=>{
     const name = req.query.name;
-    const allPokes = await getAllPokemons();
+    const allPokes = await getApiInfoPokemon();
     if(name){
         const pokeName = await allPokes.filter(e => e.name.toLowerCase().includes(name.toLowerCase()))
         pokeName.length ? res.status(200).send(pokeName) : res.status(404).send('Pokemon not found');

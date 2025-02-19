@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokeByParams, cleanDetail } from '../actions/actions'
+import { getPokeByParams, cleanDetail } from "../Redux/actions/actions"
 import { useEffect } from "react";
 import '../css/Detail.css'
-import LogoGif from '../img/LogoGif.gif'
-import img from '../img/defaultCreation.png'
+import LogoGif from '../assets/img/LogoGif.gif'
+import img from '../assets/img/defaultCreation.png'
 
 
 export default function Detail(id){

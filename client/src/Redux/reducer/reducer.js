@@ -2,12 +2,11 @@ const initialState = {
     pokemons : [],
     types: [],
     allPokemons: [],
-    // detail: {},
      detail: [],
 } 
 
  function rootReducer (state= initialState,action){
-    // eslint-disable-next-line default-case
+    
  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------//     
     switch(action.type){
         case "GET_POKEMONS":
@@ -32,11 +31,9 @@ const initialState = {
                 defense: e.defense,
                 attack: e.attack,
                 speed: e.speed,
-                // type:e.type?.map(e=> e[0].toUpperCase()+e.slice(1)),
+              
                 types:e.type ? e.type : e.types.map(e=> e.name) 
-                // types:  e.types?.map(e=> e)
-
-                // type: e.type && e.type.map(e=> e)
+               
            }))
            console.log(allPokemons , 'asd')
             const typesFiltered = action.payload === 'all' ? state.allPokemons : allPokemons.filter(e=>e.types && e.types.includes(action.payload))
@@ -55,9 +52,8 @@ const initialState = {
               
                 return{
                     ...state,
-                    // pokemons:action.payload === 'all' ? allPoke2 : filterPoke
                     pokemons:filterPoke
-                    // pokemons:pokeCreated
+                 
             
                 }
  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------//               

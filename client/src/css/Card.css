@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap');
 
 .card {
-    background-image: url(../img/FondoCard.png);
+    background-image: url(../assets/img/FondoCard.png);
     background-position: 100%;
     background-attachment:local;
     text-align: center;

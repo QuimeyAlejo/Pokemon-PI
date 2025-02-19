@@ -98,7 +98,7 @@ select {
     font-size: 20px;
     text-align: center;
     min-height: 35px;
-    background-image: url(../img/fondobuscador.jpg);
+    background-image: url(../assets/img/fondobuscador.jpg);
     background-size: cover;
     color: white;
     outline: none;

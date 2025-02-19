@@ -13,7 +13,7 @@
     border: 1px solid gray;
     float: left;
     width: 80%;
-    background-image: url(../img/fondobuscador.jpg);
+    background-image: url(../assets/img/fondobuscador.jpg);
     background-size: cover;
     max-width: 100px;
     border-radius: 8px;
@@ -37,7 +37,7 @@
     border-color: white;
 }
 .buttonSearch{
-    background-image: url(../img/unnamed.jpg);
+    background-image: url(../assets/img/unnamed.jpg);
     background-position:center ;
     background-size:cover;
     padding: 8%;
